@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Forgive Me My Love</title>
+  <style>
+    :root{
+      --bg1:#1b0c16;
+      --bg2:#0d0311;
+      --accent1:#ff4e88;
+      --accent2:#ffd166;
+      --accent3:#ff6b6b;
+    }
+
+    html,body{
+      height:100%;
+      margin:0;
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(1200px 600px at 10% 20%, rgba(255,110,150,0.08), transparent),
+                  radial-gradient(800px 400px at 90% 80%, rgba(255,200,150,0.06), transparent),
+                  linear-gradient(180deg,var(--bg1),var(--bg2));
+      color:#fff;
+      overflow:hidden;
+    }
+
+    .wrap{
+      min-height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:40px;
+      text-align:center;
+      position:relative;
+      overflow:hidden;
+    }
+
+    /* glowing shapes */
+    .shape{
+      position:absolute;
+      filter: blur(50px);
+      opacity:0.2;
+      border-radius:50%;
+    }
+    .shape.one{
+      width:500px;height:500px;
+      background: linear-gradient(45deg,var(--accent1),var(--accent3));
+      left:-100px; top:-80px;
+      animation:floatA 8s ease-in-out infinite;
+    }
+    .shape.two{
+      width:400px;height:400px;
+      background: linear-gradient(120deg,var(--accent2),#ffb3c1);
+      right:-100px; bottom:-100px;
+      animation:floatB 10s ease-in-out infinite;
+    }
+    @keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-30px)}}
+    @keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(30px)}}
+
+    .card{
+      position:relative;
+      z-index:2;
+      max-width:800px;
+      padding:40px;
+      border-radius:20px;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    }
+
+    .headline{
+      font-size: clamp(28px, 6vw, 48px);
+      font-weight:700;
+      margin:0 0 20px;
+      background: linear-gradient(90deg, var(--accent1), var(--accent2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: glow 3s infinite ease-in-out;
+    }
+    @keyframes glow {
+      0% { text-shadow:0 0 8px rgba(255,110,150,0.4); }
+      50% { text-shadow:0 0 18px rgba(255,200,150,0.6); }
+      100%{ text-shadow:0 0 8px rgba(255,110,150,0.4); }
+    }
+
+    .typing{
+      font-size:18px;
+      white-space:nowrap;
+      overflow:hidden;
+      border-right:3px solid #fff;
+      width:0;
+      margin:auto;
+      animation:typing 6s steps(40,end) forwards, blink 0.7s infinite;
+    }
+    @keyframes typing{to{width:100%}}
+    @keyframes blink{50%{border-color:transparent}}
+
+    /* buttons */
+    .buttons{
+      margin-top:30px;
+      position:relative;
+    }
+    button{
+      padding:12px 25px;
+      font-size:18px;
+      border:none;
+      border-radius:12px;
+      cursor:pointer;
+      margin:10px;
+      transition:all 0.3s ease;
+    }
+    #yes{
+      background:#4CAF50;
+      color:white;
+    }
+    #yes:hover{background:#45a049; transform:scale(1.1);}
+    #no{
+      background:#f44336;
+      color:white;
+      position:absolute;
+    }
+
+    .message{
+      display:none;
+      margin-top:25px;
+      font-size:24px;
+      color:#ffd166;
+      font-weight:bold;
+      animation: pop 0.6s ease-in-out;
+    }
+    @keyframes pop {
+      from {transform: scale(0);}
+      to {transform: scale(1);}
+    }
+
+    /* floating hearts */
+    .hearts{
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      z-index:1;
+    }
+    .hearts span{
+      position:absolute;
+      bottom:-40px;
+      font-size:22px;
+      animation:rise 6s linear infinite;
+      opacity:0;
+    }
+    .hearts span:nth-child(1){left:20%; animation-delay:0s;}
+    .hearts span:nth-child(2){left:40%; animation-delay:2s;}
+    .hearts span:nth-child(3){left:60%; animation-delay:4s;}
+    .hearts span:nth-child(4){left:80%; animation-delay:1s;}
+    @keyframes rise{
+      0%{transform:translateY(0) scale(0.8);opacity:0;}
+      20%{opacity:1;}
+      100%{transform:translateY(-500px) scale(1.2);opacity:0;}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="shape one"></div>
+    <div class="shape two"></div>
+
+    <div class="card">
+      <h1 class="headline">My Love, Please Forgive Me ❤️</h1>
+      <p class="typing">
+        I know I made a mistake... but my heart belongs only to you.  
+        Please accept my apology and give me another chance. 💕
+      </p>
+
+      <div class="buttons">
+        <button id="yes">Yes 💕</button>
+        <button id="no">No 😢</button>
+      </div>
+
+      <div class="message" id="message">Yay! I knew you still love me 💖😘</div>
+    </div>
+
+    <div class="hearts">
+      <span style="color:#ff4e88;">❤</span>
+      <span style="color:#ffd166;">❤</span>
+      <span style="color:#ff6b6b;">❤</span>
+      <span style="color:#ffb3c1;">❤</span>
+    </div>
+  </div>
+
+  <script>
+    const yesBtn = document.getElementById("yes");
+    const noBtn = document.getElementById("no");
+    const msg = document.getElementById("message");
+
+    yesBtn.addEventListener("click", () => {
+      msg.style.display = "block";
+      yesBtn.style.display = "none";
+      noBtn.style.display = "none";
+    });
+
+    // make No button run away
+    noBtn.addEventListener("mouseover", () => {
+      const x = Math.floor(Math.random() * (window.innerWidth - noBtn.clientWidth));
+      const y = Math.floor(Math.random() * (window.innerHeight - noBtn.clientHeight));
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+    });
+  </script>
+</body>
+</html>

@@ -157,6 +157,28 @@
       20%{opacity:1;}
       100%{transform:translateY(-500px) scale(1.2);opacity:0;}
     }
+
+    /* game */
+    #game{
+      display:none;
+      margin-top:30px;
+      position:relative;
+      width:100%;
+      height:300px;
+      border:2px dashed #ffd166;
+      border-radius:12px;
+      overflow:hidden;
+      background:rgba(255,255,255,0.05);
+    }
+    .pikachu{
+      position:absolute;
+      width:80px;
+      cursor:pointer;
+      transition: transform 0.2s;
+    }
+    .pikachu:hover{
+      transform:scale(1.2);
+    }
   </style>
 </head>
 <body>
@@ -176,7 +198,10 @@
         <button id="no">No 😢</button>
       </div>
 
-      <div class="message" id="message">Yay! I knew you still love me 💖😘</div>
+      <div class="message" id="message">Yay! I knew you still love me 💖😘<br>Catch the Pikachu for me!</div>
+
+      <!-- game area -->
+      <div id="game"></div>
     </div>
 
     <div class="hearts">
@@ -191,11 +216,14 @@
     const yesBtn = document.getElementById("yes");
     const noBtn = document.getElementById("no");
     const msg = document.getElementById("message");
+    const game = document.getElementById("game");
 
     yesBtn.addEventListener("click", () => {
       msg.style.display = "block";
       yesBtn.style.display = "none";
       noBtn.style.display = "none";
+      game.style.display = "block";
+      spawnPikachu();
     });
 
     // make No button run away
@@ -205,6 +233,23 @@
       noBtn.style.left = `${x}px`;
       noBtn.style.top = `${y}px`;
     });
+
+    // mini Pikachu game
+    function spawnPikachu(){
+      const img = document.createElement("img");
+      img.src = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png";
+      img.className = "pikachu";
+      img.style.left = Math.random() * (game.clientWidth - 80) + "px";
+      img.style.top = Math.random() * (game.clientHeight - 80) + "px";
+      
+      img.addEventListener("click", () => {
+        alert("You caught Pikachu! ⚡💛");
+        img.remove();
+        setTimeout(spawnPikachu, 1500); // respawn another Pikachu
+      });
+
+      game.appendChild(img);
+    }
   </script>
 </body>
 </html>
